@@ -1,0 +1,236 @@
+set nu "显示行号
+":cANSI   UI字体
+"set guifont=Monaco:h7.5
+set guifont=Courier_New:h9
+set ruler           " 显示自定义规则
+set showcmd         " 显示快捷Cmd命令 
+set ruler 
+"自定义备份文件到 backup文件夹
+set backupdir=F:\Vim\backup 
+set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%) 
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M:%S\")}   "状态显示格式
+"Windows系统共享剪切板
+set clipboard+=unnamed 
+" If you prefer the scheme to match the original monokai background color, put this in your .vimrc file: 
+let g:molokai_original = 1
+" There is also an alternative scheme under development for color terminals which attempts to bring the 256
+" color version as close as possible to the the default (dark) GUI version. To access, add this to your .vimrc: 
+let g:rehash256 = 1
+" when open file Close swapfile
+set noswapfile
+
+set encoding=utf-8
+set fileencoding=utf-8
+set termencoding=cp936
+if has("win32") 
+    "set encoding=utf-8
+    set fileencoding=chinese 
+else 
+    set fileencoding=utf-8 
+endif 
+
+au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.cshtml set filetype=html
+au BufRead,BufNewFile *.aspx set filetype=html
+"中文显示设定可移除
+language messages zh_CN.utf-8
+" auto set current edit fiele path as select dir
+set autochdir
+" --------- 设置对齐线 beg
+"  可选值 [˽˰··]
+let g:indentLine_leadingSpaceChar = '·'
+" 可选值 [| ¦ ┆ │]
+let g:indentLine_char = '│' 
+let g:indentLine_enabled = 0
+let g:indentLine_leadingSpaceEnabled = 1
+" Vim
+let g:indentLine_color_term = 239
+
+"GVim
+let g:indentLine_color_gui = '#cccccc'
+
+" none X terminal
+let g:indentLine_color_tty_light = 4 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2) 
+" --------- 设置对齐线 end
+
+
+"---------------------------------------------------------------------------
+" 括号自动补全
+" http://www.linuxgem.org/tip/bracket-auto-closing-in-vim.html
+"---------------------------------------------------------------------------
+:inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+:inoremap { {}<ESC>i
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+":inoremap < <><ESC>i
+":inoremap > <c-r>=ClosePair('>')<CR> 
+function ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endf
+
+set noerrorbells
+set visualbell
+
+"colorscheme northland
+colorscheme molokai2
+set go=
+" insert 4 spaces when indent
+"设置缩进
+set shiftwidth=4
+set sts=4
+set tabstop=4       " 统一缩进4个空字符
+set smartindent
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+
+set history=1000    
+"----------------------设置行列高亮---------------------------
+set cursorline
+"set cursorcolumn
+
+"关闭兼容模式
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+"-------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=F:/Vim/vim73/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+Plugin 'user/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+" 过时命令        |       新命令
+" Bundle            | Plugin
+" BundleInstall(!)  | PluginInstall(!), VundleInstall(!)
+" BundleUpdate      | PluginUpdate, VundleUpdate
+" BundleSearch(!)   | PluginSearch(!), VundleSearch(!)
+" BundleClean       | PluginClean(!), VundleClean(!)
+" BundleList        | PluginList
+
+" 使用Vundle来管理插件，这个必须要有。
+"Bundle 'gmarik/vundle'
+ 
+"" 以下为要安装或更新的插件，不同仓库都有（具体书写规范请参考帮助）
+"Bundle 'a.vim'
+"Bundle 'Align'
+"Bundle 'jiangmiao/auto-pairs'
+"Bundle 'bufexplorer.zip'
+"Bundle 'ccvext.vim'
+"Bundle 'cSyntaxAfter'
+"Bundle 'ctrlpvim/ctrlp.vim'
+"Bundle 'mattn/emmet-vim'
+"Bundle 'Yggdroot/indentLine'
+"Bundle 'vim-javacompleteex'
+"Bundle 'Mark--Karkat'
+"Bundle 'Shougo/neocomplcache.vim'
+"Bundle 'scrooloose/nerdcommenter'
+"Bundle 'scrooloose/nerdtree'
+"Bundle 'OmniCppComplete'
+"Bundle 'Lokaltog/vim-powerline'
+"Bundle 'repeat.vim'
+"Bundle 'msanders/snipmate.vim'
+"Bundle 'wesleyche/SrcExpl'
+"Bundle 'std_c.zip'
+"Bundle 'tpope/vim-surround'
+"Bundle 'scrooloose/syntastic'
+"Bundle 'majutsushi/tagbar'
+"Bundle 'taglist.vim'
+"Bundle 'TxtBrowser'
+"Bundle 'ZoomWin'
+"-------------------------------------------------------------
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+" F2取消高亮
+nmap <F2> :nohlsearch<CR>:echo <CR>
+
+" F3删掉windows换行符^M
+nmap <F3> :%s/\r\(\n\)/\1/g<CR>:echo <CR>
+
+" F4高亮当前光标所在列
+nmap <F4> :call SetColorColumn()<CR>:echo <CR>
+function! SetColorColumn()
+    let col = virtcol(".")
+    let ccs = split(&cc,',')
+    if count(ccs, string(col)) <= 0
+        let op = "+"
+    else
+        let op = "-"
+    endif
+    exec "set cc".op."=".col
+endfunction
+
+"F5 打开NERDTree
+nmap <F5> :NERDTreeToggle<CR>
+" F7 打开当前文件所在目录
+nmap <F7> :NERDTreeFind<CR>
